@@ -2,6 +2,7 @@
   <name>Idle Indexing</name>
   <id>com.jetbrains.inin</id>
   <description><![CDATA[
+      <p><b>Warning: This plugin is no longer maintained!</b></p>
       <p>Makes the UI more responsive by allowing your IDE to index files only when it's idle.</p>
       <br/>
       <p>Have you ever noticed your IDE becomes less responsive when it's indexing files during the startup or on opening a project? The Idle Indexing plugin allows your IDE to index files only when the IDE is idle and suspends indexing immediately when the IDE becomes active. The plugin frees up your CPU, so it can be very responsive to your keyboard input and mouse events. The default idle timeout is 3 seconds.</p>
@@ -26,6 +27,7 @@
   <change-notes><![CDATA[
     <p>0.2.2:</p>
     <ul>
+      <li>Changed the status of the project to unmaintained</li>
       <li>Open-sourced under the Apache License 2.0</li>
       <li>Compatibility with 2022.1+</li>
     </ul>

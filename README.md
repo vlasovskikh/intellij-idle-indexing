@@ -1,8 +1,14 @@
+# Warning: This plugin is no longer maintained!
+
+I no longer maintain this plugin. If you're interested in developing it further, feel free to fork the project. If you have any questions, feel free to contact me.
+
+
 # Idle Indexing plugin
 
 The **Idle Indexing** plugin makes the UI of your IDE more responsive by allowing it to index files only when the IDE is idle.
 
 ![Idle Indexing in the status bar](media/idle-status-bar.png)
+
 
 ## Rationale
 

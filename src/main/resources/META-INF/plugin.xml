@@ -1,0 +1,68 @@
+<idea-plugin require-restart="true" url="https://plugins.jetbrains.com/plugin/15173-idle-indexing">
+  <name>Idle Indexing</name>
+  <id>com.jetbrains.inin</id>
+  <description><![CDATA[
+      <p>Makes the UI more responsive by allowing your IDE to index files only when it's idle.</p>
+      <br/>
+      <p>Have you ever noticed your IDE becomes less responsive when it's indexing files during the startup or on opening a project? The Idle Indexing plugin allows your IDE to index files only when the IDE is idle and suspends indexing immediately when the IDE becomes active. The plugin frees up your CPU, so it can be very responsive to your keyboard input and mouse events. The default idle timeout is 3 seconds.</p>
+      <br/>
+      <p>Pros:</p>
+      <ul>
+        <li><b>More responsive UI</b> ⚡ while indexing is in progress</li>
+      </ul>
+      <p>Cons:</p>
+      <ul>
+        <li>Incomplete code insight results while indexing is in progress</li>
+        <li>The IDE disables some actions while indexing is in progress</li>
+      </ul>
+      <br/>
+      <p>⬇️ Install the Idle Indexing plugin and check if it improves your experience during indexing.</p>
+      <br/>
+      <p>Please ⭐ <a href="https://plugins.jetbrains.com/plugin/15173-idle-indexing/reviews">rate the plugin</a> or 💬 <a href="https://plugins.jetbrains.com/plugin/15173-idle-indexing/reviews">write a review</a>! 🙏 I really need your feedback to make the plugin better!</p>
+    ]]></description>
+  <version>0.2.2</version>
+  <vendor url="https://github.com/vlasovskikh">Andrey Vlasovskikh</vendor>
+
+  <change-notes><![CDATA[
+    <p>0.2.2:</p>
+    <ul>
+      <li>Open-sourced under the Apache License 2.0</li>
+      <li>Compatibility with 2022.1+</li>
+    </ul>
+    <p>0.2.1:</p>
+    <ul>
+      <li>Compatibility with 2020.2-2021.1</li>
+    </ul>
+    <p>0.2:</p>
+    <ul>
+      <li>Allow 5 seconds of indexing before suspending it when the IDE is active (you can tweak it in the Registry <code>ide.index.suspend.timeout</code>)</li>
+      <li>Reduced the idle indexing timeout to 3 seconds (you can tweak it in the Registry: <code>ide.index.idle.timeout</code>)</li>
+      <li>Compatibility with 2020.2-2021.1</li>
+    </ul>
+  ]]></change-notes>
+
+  <idea-version since-build="221"/>
+
+  <depends>com.intellij.modules.platform</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationService serviceImplementation="com.jetbrains.inin.InInModel"/>
+    <applicationService serviceImplementation="com.jetbrains.inin.InInIdleListener"/>
+    <applicationService serviceImplementation="com.jetbrains.inin.InInTimeoutListener"/>
+    <postStartupActivity implementation="com.jetbrains.inin.InInStartupActivity"/>
+    <registryKey defaultValue="3" description="Idle indexing timeout in seconds" key="ide.index.idle.timeout"/>
+    <registryKey defaultValue="5" description="Initial indexing timeout before suspending it when the IDE is idle, seconds" key="ide.index.suspend.timeout"/>
+  </extensions>
+
+  <!--suppress PluginXmlValidity -->
+  <applicationListeners>
+    <listener class="com.jetbrains.inin.InInSuspenderListener"
+              topic="com.intellij.openapi.progress.impl.ProgressSuspender$SuspenderListener"/>
+  </applicationListeners>
+
+  <!--suppress PluginXmlValidity -->
+  <projectListeners>
+    <listener class="com.jetbrains.inin.InInDumbModeListener"
+              topic="com.intellij.openapi.project.DumbService$DumbModeListener"/>
+  </projectListeners>
+</idea-plugin>

@@ -1,0 +1,23 @@
+digraph {
+  node [shape = doublecircle]; init;
+  node [shape = rect, style=rounded];
+
+  init -> active_smart;
+  active_smart -> idle_smart [label="user_idle"];
+  active_smart -> active_initial_indexing [label="entered_dumb_mode"];
+  idle_smart -> active_smart [label="user_activity"];
+  idle_smart -> idle_initial_indexing [label="entered_dumb_mode"];
+  active_initial_indexing -> idle_initial_indexing [label="user_idle"];
+  active_initial_indexing -> active_smart [label="exited_dumb_mode"];
+  active_initial_indexing -> active_indexing_suspended [label="initial_indexing_timeout"];
+  idle_initial_indexing -> active_initial_indexing [label="user_activity"];
+  idle_initial_indexing -> idle_smart [label="exited_dumb_mode"];
+  idle_initial_indexing -> idle_indexing [label="initial_indexing_timeout"];
+  active_indexing_suspended -> idle_indexing [label="user_idle"];
+  active_indexing_suspended -> active_indexing_resumed [label="indexing_resumed"];
+  idle_indexing -> idle_smart [label="exited_dumb_mode"];
+  idle_indexing -> active_indexing_suspended [label="user_activity"];
+  active_indexing_resumed -> active_smart [label="exited_dumb_mode"];
+  active_indexing_resumed -> active_indexing_paused [label="indexing_paused"];
+  active_indexing_paused -> active_indexing_resumed [label="indexing_resumed"];
+}
